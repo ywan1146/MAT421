@@ -1,0 +1,284 @@
+#question 1
+##############################################
+def my_lin_interp(x_list,y_list,x_val):
+print("interpolitan formulla:y(X)=y1+[y2-y1}/(x2-x1)](X-x1) where x1-->x1 and y1-->y1 and x2-->x1+1 and y2-->y1+1")
+#x=[1,2.5,3.4,5.8,6]
+x=x_list
+y1=y_list
+y=x_val
+j=0
+listlen=len(x)
+print(listlen)
+print(x[0:1])
+print(x[1:2])
+#temp=(x[0:2:])
+#print(temp)
+for m in range(listlen)
+	if j+1 == listlen:
+		break
+	if x[j] < y and y< x[j+1]:
+		print("number in range of {} and {} i.e between index {} and {}".format(x[j],x[j+1],j,j+1))
+		print("these are x1 and x2 values similarly pick up correspomding y1 and y2 values from list y")
+		print(y1[j])
+		print(y1[j+1])
+		intervals=zip(x_list,x_list[1:],y_list,y_list[1:])
+		for v in intervals:print(v)
+		return x[j],x[j+1],y1[j],y1[j+1]
+	else:
+		print("number not in range of {} and {}".format(x[j],x[j+1]))
+		#return 0
+	j+=1
+	#interp=my_lin_interp(x_list,y_list,x_val)
+	x_list,y_list=[1,2.5,3.4,5.8,6],[2,4,5.8,4.3,4]
+	x_val=3
+	x1,x2,y1,y2=my_lin_interp(x_list,y_list,x_val)
+	print(x1,x2,y1,y2)
+	slope=y2-y1/x2-x1
+	print(slope)
+	y_x_val=y1+slope*(x_val-x1)
+	print("therefore the interpolation at x=3 is :",y_x_val)
+  #question 2
+  ######################################
+  Program:
+import numpy as np
+def my_cubic_spline(x_list,y_list,x_val):
+x=x_list
+y1=y_list
+y=x_val
+j=0
+listlen=len(x)
+print(listlen)
+print(x[0:1])
+print(x[1:2])
+ans=np.array([1,2,0,0,0])
+#print(ans)
+ans=ans[:,np.newaxis]
+print(ans)
+cubic=np.array([[1,1,0,0,0],
+[0,0,1,1,1],
+[1,3,-1,0,0],
+[0,3,0,-1,0],
+[0,0,0,2,6]])
+array=np.dot(np.linalg.inv(cubic),ans)
+print(array)
+print("a0=0,a1=3,c0=0,b0={},d0={},b1={},c1={},d1=
+{".format(array[0],array[1],array[2],array[3],array[4]))
+#S0=a0+b0(x-1)+c0(x-1)**2+d0(x-1)**3
+S0=2+array[0]*(1.5-1)+0*(1.5-1)**2+array[1]*(1.5-1)**3
+#[x=2,y=3]S1=a1+b1(x-1)+c1(x-1)**2+d1(x-1)**3
+S1=3+array[2]*(1.5-1)+array[3]*(1.5- 1)**2+array[4]*(1.5-1)**3
+print("x=1.5 lies between [1,2] and [2,3] therefore calculating S0",S0)
+#print(S1)
+return ans,SO
+x_list,y_list=[1,2,3],[2,3,5]
+X_val=1.5
+sol,SO=my_cubic_spline(x_list,y_list,x_val)
+print ("Therefore the cubic natural spline interpolitan at x=1.5 is :",S0)
+#question 3
+###################################
+Program:
+2.14 3.25 4.36 5.47 6.58
+3.65 1010 1
+5.86 0 1 11 0
+7.47 11000
+5.99 0 1110
+6.8 11100"
+import numpy as np
+import matplotlib.pyplot as plt
+def my_nearest_neighbour(x0,y0,x):
+xi=np.abs(x_list-x0).argmin()#argmin returns indices of the min element of the array in a
+particular axis
+print("xlist-x0=",(x_list-x0))
+print("x_list:",x_list,"\nxi:",xi)
+yi=np.abs(y_list-y0).argmin()
+print("ylist-y0=",(y_list-y0))
+print("y_list:",y_list,"\nyi:",yi)
+return data[xi,yi]
+x_list=np.array([2.14,3.25,4.36,5.47,6.58])
+y_list=np.array([3.65,5.86,7.47,5.99,6.8])
+data=np.array([
+[1,0,1,0,1],
+[0, 1, 1, 1,0],
+[1,1,0,0,0],
+[0, 1, 1, 1,0],
+[1,1,1,0,0]])
+print (data)
+dat1=my_nearest_neighbour(4.1,5.9,x_list)
+print ("data at (4.1,5.9)=:",dat1)
+dat2=my_nearest_neighbour(6.7,4.1,x_list)
+print ("data2 at(2.76,7.1)=:",dat2)
+plt.plot(x_list,y_list,"ro")
+plt.plot(x_list,y_list,"b")
+plt.annotate("Point2",(4.1,5.9),size=20)
+plt.plot(4.1,5.9,'ro',ms=15)
+plt.annotate("Point2",(6.7,4.1),size=20)
+plt.plot(6.7,4.1,'ro',ms=15)
+plt.xlabel("x",size=20)
+plt.ylabel("y",size=20)
+plt.title("Nearest Neighbor Interpolitan",size=20)
+plt.show()
+#question 4
+##################################
+#Cubic Spline Interpolation and Nearest Neighbor (NN) Interpolation:
+#If the number of data points increases then the plotting with a Cub#ic Spline would be a very
+#tedious job. It would involve a lot of equations for each small spline. In such cases NN provides
+#with a good option.
+#In a cluster of data points where a huge number of data points are plotted, the Nearest
+#Neighbor Interpolation is superior to the Cubic Spline Interpolation.In Classification problems like
+#market segmentation, where it is required to classify the data points into various sections without
+#having any information about the data ,the data points are clustered depending on their
+#properties like the distance between them, NN will be easier to implement rather than Cubic
+#Spline.
+#This is a case of unsupervised learning where the information of the data is not known and the
+#learning has to be done from the data itself without any user interaction. Hence NN is more
+#suitable in this case of unsupervised learning.
+#• When the large data point's density is concentrated at specific locations then constructing
+#splines for each data point would be a tedious job and would require higher degree polynomial
+#equations which would in turn require high memory and higher processing speed.
+#• The number of curves in the graph is equal to the degree of polynomial equation that is used to
+#represent it .The number of curves corresponds to the degree of polynomial. Equations with
+#Quardratic polynomial and above would require a higher order derivative to be calculated and
+#would further complicate the Cubic Spline.
+#• Higher the degree of polynomial the higher the number of unknowns and hence higher the
+#number of equations that would be required to be evaluated. And hence the matrix formed would
+#be of higher order.This would in turn require a large memory and a faster processor speed.
+#• NN which takes into account the simple calculations in the form of Euclidean distance is much
+#simpler and faster.
+#• Lastly in the cases where the degree of polynomial is 1,the Cubic Spline would almost be a
+#straight line like a Linear regression plot.
+#question 5
+##################################
+Program:
+print ("Clamped Spline")
+import numpy as np
+def my_cubic_spline(x_list,y_list,x_val):
+x=x_list
+yl=y_list
+y=x_val
+j=0
+listlen=len(x)
+print(listlen)
+print(x[0:1])
+print(x[1:2])
+ans=np.array([1,2,0,0,0])
+#print(ans)
+ans=ans[:,np.newaxis]
+print(ans)
+cubic=np.array([[1,1,0,0,0],
+[0,0,1,1,1],
+[2,3,-1,0,0],
+[1,3,0,-1,0],
+[0,0,1,2,3]])
+array=np.dot(np.linalg.inv(cubic),ans)
+print(array)
+print("a0=0,a1=3,b0=0,c0={},d0={),b1={},c1={},d1=
+)".format(array[0],array[1],array[2],array[3],array[4]))
+S0=2+0+array[0]*(1.5-1)**2+array[1]*(1.5-1)**3
+#[x=2,y=3]S1=a1+b1(x-1)+c1(x-1)**2+d1(x-1)**3
+S1=3+array[2]*(1.5-1)+array[3]*(1.5- 1)**2+array[4]*(1.5-1)**3
+print("x=1.5 lies between [1,2] and [2,3] therefore cald lating S0",S0)
+#print(S1)
+return ans,S0
+x_list,y_list=[1,2,3],[2,3,5]
+X_val=1.5
+sol,S0=my_cubic_spline(x_list,y_list,x_val)
+print ("Therefore the cubic clamped spline interpolitan at x=1.5 is :",S0)
+#question 6
+###############################
+Program:
+#17-6P quintic spline using the CubicSpline method
+import numpy as np
+from scipy.interpolate import interp1d
+import matplotlib.pyplot as plt
+def my_quintic_spline(x,y,X):
+D=4 #End point constraint
+plt.style.use("seaborn-poster")
+#f=CubicSpline(x,y,bc_type="clamped")
+f=CubicSpline(x,y,bc_type=((1,D),(1,D)))#"clamped"
+#f=CubicSpline(x,y,bc_type=((2,D),(2,D)))#"natural"
+#two types of spline:clamped(boundary based)and natural
+plt.figure(figsize=(10,6))
+y_new=f(X)
+plt.plot(X,y_new,"y",label="clamped")
+plt.scatter(x,y)
+plt.title("Quintic Spline Clamped Interpolation")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.annotate("Point (x={},y=(})".format(1.5,f(1.5)),(1.5,f(1.5)),size=15)
+plt.plot(1.5,f(1.5),'ro',ms=25)
+return y_new
+x_list,y_list=[1,2,3,4,5,6,7,8,9],[2,3,5,6,7,9,10,11,12]
+X_val=np.linspace(0,9,100)
+#x_val=1.5
+y_new=my_quintic_spline(x_list,y_list,x_val)
+#print("therefore the interpolitan at x=1.5 is :",S0)
+plt.show()
+#question 7
+################################
+Program:
+#17-7P
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import interpolate
+def my_interp_plotter(x,y,X,option):
+kind=option
+plt.figure(figsize=(10,8))
+plt.plot(x,y,'ro',label="data")
+f=interpolate.interp1d(x,y,kind)
+Y=f(X)
+plt.plot(X,Y,"b",label=kind)
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.legend()
+if kind == "nearest":
+plt.title("nearest interpolation of data")
+elif kind=="linear":
+plt.title("linear interpolation of data")
+else:
+plt.title("cubic interpolation of data")
+plt.show()
+x=np.array([0,0.1,0.15,0.35,0.6,0.7,0.95,1])
+y=np.array([1,0.8187,0.7408,0.4966,0.3012,0.2466,0.1496,0.1353])
+#for kind in ['nearest','linear",'spline']:
+my_interp_plotter(x,y,np.linspace(0,1,101),"nearest")
+my_interp_plotter(x,y,np.linspace(0,1,101),"linear")
+my_interp_plotter(x,y,np.linspace(0,1,101),"cubic")
+#question 8
+####################################
+Program:
+#17-8P
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import CubicSpline
+print ("Clamped Spline")
+#CubicHermiteSpline()
+#splrep() interpolate n-dim spline
+#splev() to evaluate its derivatives
+def my_D_cubic_spline(x,y,X,D):
+plt.style.use("seaborn-poster")
+#f=CubicSpline(x,y,bc_type="clamped")
+f=CubicSpline(x,y,bc_type=((1,D),(1,D)))#"clamped"
+y_new=f(X)
+plt.plot(X,y_new,"b",label="clamped")
+#plt.plot(x,y,"r")
+plt.scatter(x,y)
+#plt.title("Cubic Spline Clamped Interpolation")
+#plt.xlabel("x")
+#plt.ylabel("y")
+plt.plot(1.5,f(1.5),'ro',ms=25)
+return y_new
+X,y=[0,1,2,3,4],[0,0,1,0,0]
+X=np.linspace(0,4,101)
+Y=my_D_cubic_spline(x,y,1.5,1)
+plt.figure(figsize=(10,8))
+plt.subplot(221)
+plt.plot(x,y,"ro",X,my._D_cubic_spline(x,y,X,0),"b")
+plt.subplot(222)
+plt.plot(x,y,"ro",X,my_D_cubic_spline(x,y,X,1),"b")
+plt.subplot(223)
+plt.plot(x,y,"ro",X,my_D_cubic_spline(x,y,X,-1),"b")
+plt.subplot(224)
+plt.plot(x,y,"ro",X,my_D_cubic_spline(x,y,X,4),"b")
+#plt.tight_layout()
+plt.show()
+print ("Therefore the cubic clamped spline interpolitan at x=1.5 is :",Y)
