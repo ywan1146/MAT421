@@ -1,0 +1,114 @@
+#question 1
+####################################################
+The following is the required Python script with the required function:
+# Importing numpy for array manipulation
+import numpy as np
+# Importing scipy for solving initial value problem
+from scipy.integrate import solve_ivp
+# Importing matplotlib for plotting curves
+import matplotlib.pyplot as plt
+# Importing functools's partial for creating the handle
+from functools import partial
+# Based on the given definition of mass-spring-damper
+# crafting the differential equation
+def my_msd(t, S, m, c, k):
+dS =
+np.dot(np.array([[0, 1], [-k / m, -c/ m]]), S)
+return dS
+# Test 1
+dS = my_msd(0, [1, -1], 10, 1, 100)
+print(dS)
+# Test 2
+m = 1
+k = 10
+f = partial(my_msd, m=m, c=0, k=k)
+t_e = np.arange(0, 20, 0.1)
+sol_1 = solve_ivp(f, [0, 20], [1, 0], t_eval=t_e)
+f = partial(my_msd, m=m, c=1, k=k)
+sol_2 = solve_ivp(f, [0, 20], [1, 0], t_eval=t_e)
+f = partial(my_msd, m=m, c=10, k=k)
+sol_3 = solve_ivp(f, [0, 20], [1, 0], t_eval=t_e)
+plt.figure(figsize=(10, 8))
+plt.plot(sol_1.t, sol_1.y[0])
+plt.plot(sol_2.t, sol_2.y[0])
+plt.plot(sol_3.t, sol_3.y[0])
+plt.title("Numerical Solution of MSD System with Varying Dampling")
+plt.xlabel("time")
+plt.ylabel("displacement")
+plt.legend(["no dampling", "c=1", ">critically damped"], loc=1)
+plt.show()
+
+#question 2
+##############################################
+The following is the required Python script with the required function:
+# Importing numpy for array manipulation
+import numpy as np
+# Function to integrate the differential equation ds
+# using forward euler method
+def my_forward_euler(ds, t_span, s0):
+it (len(1_span) < 2):
+raise BaseException("Error: span must be of length be more than 1!")
+# Calculating steps
+h = (t_span[-1] - t_span[0]) / (len(t_span) - 1)
+S = np.zeros(len(t_span)+1,1))
+s[0] = s0
+for i in range(0, len(t_span)):
+s[i+1] = s[i) + h' ds(t_span[i}, s[i])
+t =t_span
+S = s.transpose()[0]
+return [t, s]
+t_span = np.linspace(0, 1, 10)
+s0 = 1
+# Define parameters
+f = lambda t, s: t*np.exp(-s)
+t_eul, s_eul = my_forward_euler(f, t_span, s0)
+print(t_eul)
+print(s_eul)
+
+#question 3
+##############################################
+The following is the required Python script with the required function:
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+# Function to integrate differential equation using
+# fourth order Runge-Kutta method
+def myRK4(ds, t_span, s0):
+if (len(t_span) < 2):
+raise BaseException("Error: span must be of length be more than 1!")
+# Calculating steps
+h = (t_span[-1] -t_span[0]) / (len(t_span) -1)
+s = np.zeros((len(t_span),1))
+s[0] = s0
+for i in range(0, len(t_span)-1):
+k1 = ds( t_span[i], s[i] );
+# change at beginning
+# of the interval.
+k2 = ds( t_span[i] + 0.5 * h, s[i] + 0.5 * h * k1 );
+# interval) at midpoint of the interval.
+k3 = ds( t_span[i] + 0.5 * h, s[i] + 0.5 * h * k2 );
+# change of (change of (change at beginning of
+# the interval) at midpoint of the interval) at midpoint #of the interval.
+k4 = ds (t_span[i] + h, s[i] + h * k3);
+# change of (change of (change of (change
+at beginning of the interval) at midpoint of the interval) at midpoint of the interval) at the end of
+the interval.
+s[i + 1] = s[i] + h/6 * (k1 + 2 * k2 + 2 * k3 + k4);
+t =t_span
+s = s.transpose()[0]
+return [t, s]
+f = lambda t, s: np.sin(np.exp(s))/(t+1)
+t_span = np.linspace(0, 2*np.pi, 10)
+s0 = 0
+plt.figure(figsize = (10, 8))
+# Runge-Kutta method
+t, s = myRK4(f, t_span, s0)
+plt.plot(t, s, "r", label="RK4")
+# Python solver
+sol = solve_ivp(f, [0, 2*np.pi], [s0], t_eval=t)
+plt.plot(sol.t, sol.y[0], "b-", label="Python Solver")
+plt.xlabel("t")
+plt.ylabel("f(t)")
+plt.grid()
+plt.legend(loc=2)
+plt.show()
