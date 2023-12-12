@@ -1,0 +1,129 @@
+#question 1 
+##################################
+import numpy as np
+import matplotlib.pyplot as plt
+def my_der_calc(f,a,b,N,option):
+n=N
+x=np.linspace(a,b,n)
+if option == "forward":
+X=x[0:n-1]
+df=(f{x[1:n])-f(x[0:n-1])(x[1:n]-x[0:n-1])
+elif option
+== "backward":
+X=x[1:n]
+df=(f(x[1:n])-f(x[0:n-1]))/(x[1:n]-x[0:n-1])
+else :
+X=x[1:n-1]
+df=(f(x[2:n])-f(x[0:n-2]))/(x[2:n]-x[0:n-2])
+return df,X
+def plot_graph(df,X):
+plt.figure(figsize=(12,8))
+plt.plot(x,np.cos(x),label="analytic")
+plt.plot(X,df,label="forward")
+plt.plot(X,df,label="backward")
+plt.plot(X,df,label="central")
+plt.legend()
+plt.title("Analytic and numerical derivatives of Sine")
+plt.xlabel("X")
+pit.ylabel("Y")
+plt.show()
+x=np.linspace(0,2*np.pi,100)
+f=lambda x:np.sin(x)
+print ("Enter Values:In 1.forward\n 2.backward\n 3.centralln")
+option=input()
+if option == "forward":
+[df,X]=my_der_calo(f,0,2*np.pi,10,"forward")
+plot graph(df,X)
+elif option == "backward":
+[df,X]=my_der_calc(f,0,2*np.pi,10,"backward")
+plot_graph(df,X)
+elif option
+== "central":
+[df,X]=my_der_calc(f,0,2*np.pi,10,"central")
+plot_graph(df,X)
+else :
+print("Check the the entered values,by default central.")
+exit(1)
+
+#question 2
+##################################
+import numpy as np
+import matplotlib.pyplot as plt
+#f=function a=start point b= endpoint n=evenly spaced points from a to b
+def my_num_diff(f,a,b,n,option):
+#f(xj)=dyf=(f(xj+1)-f(xj))/xj+1-xj forward
+#f(xj)=dyb=(f(xj)-f(xj-1))/xj-xj-1 backward
+#f(xj)=dyc=(f(xj+1)-f(xj-1))/xj+1-xj-1 central
+X=np.linspace(a,b,n)
+if option
+"forward":
+Xf=x[0:n-1]
+dyf=(f(x[1:n])-f(x[0:n-1]))/(x[1:n]-x[0:n-1])
+return dyf,Xf
+elif option == "backward":
+#Xb=x[2:n]
+#dyb=(f(x[2:n])-f(x[1:n-1]))/(x[2:n]-x[1:n-1])
+Xb=x[1:n]
+dyb=(f(x[1:n])-f(x[0:n-1]))/(x[1:n]-x[0:n-1])
+return dyb,Xb
+else :
+Xc=x[1:n-1]
+dyc=(f(x[2:n])-f(x[0:n-2]))/(x[2:n]-x[0:n-2])
+return dyc,Xc
+X=np.linspace(0,2*np.pi,100)
+f=lambda x:np.sin(x)
+[dyf,Xf]=my_num_diff(f,0,2*np.pi,10,"forward")
+#print(dyf,",",Xf)
+[dyb,Xb]=my_num_diff(f,0,2*np.pi,10,"backward")
+#print(dyb,",",Xb)
+[dyc,Xc]=my_num_diff(f,0,2*np.pi,10,"central")
+#print(dyc,",",Xc)
+plt.figure(figsize=(12,8))
+plt.plot(x,np.cos(x),label="analytic")
+plt.plot(Xf,dyf,label="forward")
+plt.plot(Xb,dyb,label="backward")
+plt.plot(Xç,dyc,label="central")
+plt.legend()
+plt.title("Analytic and numerical derivatives of Sine")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.show()
+
+#question 3
+##################################
+The following is the required Python function:
+# Function to find the approximate derivative using the given values
+# after passing it through a smoothening function
+# x: one-dimensional grid of points
+#y: one-dimensional grid of points contaminated by noise
+#n: number of neighboring points
+def my_num_diff_w_smoothing(x.y,n):
+# Importing numpy library for array manipulation
+# functions
+import numpy as np
+x_smooth = x[np.arange(n, len(x) - n, n)];
+# Function to smooth out the data point by finding
+# mean
+def smoothData (x, y, n):
+from numpy.lib.function_base import average
+discrete = np.arange(n +1, len(y) - n, n)
+s = []
+for k in range(0,len(discrete)):
+i = discrete[k]
+s.append( average( y[ np.arange( i-n-1, i+n ) ]);
+return np.array(s)
+# Function to find the derivative of the given
+# datapoint
+# using central difference derivation
+def central_difference(y, h):
+dy = []
+for i in range(1,len(y) - 1 ):
+dy.append( (y[i + 1]- yli - 11)/ (2 *h)
+return nn array(dy)
+return np.array(dy)
+y_smooth = smoothData (x, y, n)
+X = x_smooth[np.arange(1, len(x_smooth) - 1)]
+h = ( X[len(X) -1] - X[0] ) / (len(X) - 1);
+dy = central_difference(y_smooth, h);
+return (dy, X)
+Comment
