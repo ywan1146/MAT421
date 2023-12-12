@@ -1,0 +1,98 @@
+#question 1
+####################################
+#print the message using print function
+print("I love Pyhton")
+
+#question 2
+####################################
+#initialize the variables
+base = 10
+height = 12
+#calculate the area
+area = 0.5 * base * height
+#print the result 
+print("Area =",area)
+
+#question 3
+####################################
+#This program compules the cylinder#
+####################################
+#import math module for pi
+import math
+#initalizing variables
+r,h =5,3
+#compute surface area and volume
+s_area = 2*math.pi*r*(r+h)
+vol =math.pi*r*r*h
+#print the results
+print("Surfuce area :",s_area)
+print("Volume: ",vol)
+
+#question 4
+###################################
+#This program computes the slope between the points.#
+###################################
+#initialize coordinates
+x1,y1 = 3,4
+x2,y2 = 5,9
+#calculate slope
+m = (y2 - y1)/(x2 - x1)
+#display result
+print("Slope =",m)
+
+#question 5
+####################################
+#This program computes the slope between the points.#
+####################################
+#initialize coordinates
+x1 ,y1 = 3,4
+x2 ,y2 = 5,9
+#calculate distance
+d = math.sqrt(((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1)))
+#display result
+print("Distance =",d)
+
+#question 6
+####################################
+#This program computes the faction of a number.#
+####################################
+#import math module for faction function
+import math
+#print the result
+print("Factorial of six is",math.factiorial(6))
+
+#question 7
+####################################
+#This program computes the leap years between two years.#
+####################################
+#initalize variables
+l,r = 1500,2010
+#variable to store leap year count
+count = 0
+#iterate from l to r
+while l<=r:
+#condition to check if l is a leap year
+if l%400==0 or l%4==0 and l%100!=0:
+#increment l by 1
+l+=1
+#display count
+print("Number of leap years between 1500 and 2010:",count)
+
+#question 8
+####################################
+#Calculate value of sinh using given exponential formula#
+####################################
+import math
+#required for sinh
+#function to estimate the value of sinh using exponentials
+def sinh_estimate(x):
+sin_hyperbole =0
+#calcualted value
+e=2.7182
+#constrant for exponential
+sin_hyperbole= ((e**x)-(e**(-x))/2
+#use formula
+return sin_hyperbole
+print("Sinh value for x=2 using formula:",sinh_estimate (2))
+print("Sinh value fot x=2 using python:",math.sinh(2))
+Comment
