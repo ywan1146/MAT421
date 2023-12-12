@@ -1,0 +1,77 @@
+#question 1 
+##################################
+The following is the required Python script with the required function completed:
+# Importing numpy for array manipulation
+import numpy as np
+# Importing scipy for solving initial value problem
+from scipy.integrate import solve_ivp
+# Importing matplotlib for ploting curves
+import matplotlib.pyplot as plt
+# Importing functoos's partial for creating handle
+from functools import partial
+plt.style.use("seaborn-poster")
+def my_logistic_eq(t, P, r, K):
+# Given function crafted in python syntax
+dP = r*P* (1 -P/K)
+return dP
+# Test 1
+dP = my_logistic_eq(0, 10, 1.1, 15)
+print(dP)
+# Test 2: Plotting
+t0 = 0
+tf = 20
+P0 = 10
+r = 1.1
+K = 20
+t = np.linspace(0, 20, 2001)
+f = partial(my_logistic_eq, r=r, K=K)
+sol = solve_ivp(f, [t0, tf), [PO],
+t_eval=t)
+plt.figure(figsize3(10, 8))
+plt.plot(sol.t; sol.y[0])
+plt.plot(t,
+K * P0 * np.exp(r * t) / (K + P0 * (np.exp(r * t) - 1)),
+"r:")
+plt.xlabel("time")
+plt.ylabel("population")
+plt.legend(["Numerical Solution", "Exact Solution"])
+plt.grid(True)
+plt.show()
+
+#question 2 
+##################################
+The following is the required Python script with the required function completed:
+# Importing numpy library for array manipulation functions
+import numpy as np
+# Function to form the system of differential equations of a Lorentz attracter
+def my_lorenz(t, S, sigma, rho, beta):
+if (sigma < 0) or (rho < 0) or (rho < 0):
+raise BaseException("Error: Sigma, rho and beta needs all to be non-negative!")
+dS = np.zeros(3)
+ds[0] = sigma * ( S[2] - S[1] )
+dS[1] = S[0] * ( rho - S[2] ) - S[1]
+dS[2] = S[0] * S[1] - beta * S[2];
+return dS
+# Test
+s = np.array([1, 2, 3])
+dS = my_lorenz(0, s, 10, 28, 8/3)
+print(dS)
+
+#question 3 
+##################################
+The following is the required Python script with the required function completed:
+# Importing numpy library for array manipulation functions
+import numpy as np
+# Function to form the system of differential equations of a Lorentz attracter
+def my_lorenz(t, S, sigma, rho, beta):
+if (sigma < 0) or (rho < 0) or (rho < 0):
+raise BaseException("Error: Sigma, rho and beta needs all to be non-negative!")
+dS = np.zeros(3)
+ds[0] = sigma * ( S[2] - S[1] )
+dS[1] = S[0] * ( rho - S[2] ) - S[1]
+dS[2] = S[0] * S[1] - beta * S[2];
+return dS
+# Test
+s = np.array([1, 2, 3])
+dS = my_lorenz(0, s, 10, 28, 8/3)
+print(dS)
