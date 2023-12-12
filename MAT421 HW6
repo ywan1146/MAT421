@@ -1,0 +1,70 @@
+#question 1 
+##################################
+# Fuction to compute hyporbolic sine#
+##################################
+def my_sinh(x):
+sin_hyperbole =() #initllaize
+e=2.7182#conster for exponential
+sin_hyperbole=((e**x)-(e**(-x)))/2#use formula
+rounded= round(sin_hyperbole,4)#round it off
+return rounded
+
+#question 2
+###################################
+#Fuction to produce nXn arry with alternate 1 and 0#
+###################################
+import numpy#required for zeros
+def my_checker_board(n):
+x= numpy.zeros((n,n),dtype=int)#intialize all to 0
+x[1::2, 1::2]=1#make odd rows,odd column as 1
+x[::2, ::2]=1#make even rows, even column as 1
+return x
+
+#question 3
+####################################
+#Function to calculate area of trangle#
+####################################
+def my_triagle(b,h):
+a=0.5b*h#area of triangle formula
+return a
+
+#question 4
+#####################################
+#Function to split a matrix column-wise#
+#####################################
+import numpy #requrted for array_spit functi9on
+def my_split_matrix(m):
+#split the array in two parts, columnwise
+mist-numpy.array_split(m,2,axis =1)
+return mlist
+
+#question 5
+######################################
+#Function to calculate volume and surface area of cylinder#
+######################################
+import math#requirred for pi attribute
+def my_cylinder(r,h):
+v= round(math.pi*r*r*h,4)#calculate volume
+s= round(2*math.pi*r*(r+h),4)#calcute volume
+lis=[s,v]#put both in list
+return lis
+
+#question 6
+#######################################
+#Function to count odd numbers in single dimensional array#
+#######################################
+def my_n_odd(a):
+odds=0#initialize
+for i in range(len(a)):# ;oop the array elements
+if a[i]%2:#check if it odd
+odds+=1#increment counter
+return odds#return count of odd elements
+
+#question 7
+#########################################
+#Fuction to create 2-dimonsional array containing only 2s#
+#########################################
+def my_twos(m,n):
+arr = [[2 for i in range(n)] for j in range(m)]
+return arr
+Comment
