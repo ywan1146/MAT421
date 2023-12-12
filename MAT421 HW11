@@ -1,0 +1,119 @@
+#question 1
+#########################################
+The following is the required Python script with the required function completed:
+# Importing numpy for array manipulation
+import numpy as np
+# Importing scipy for solving initial value problem
+from scipy.integrate import solve_ivp
+# Importing matplotlib for ploting curves
+import matplotlib.pyplot as plt
+# Importing functools's partial for creating handle
+from functools import partial
+plt.style.use("seaborn-poster")
+def my_logistic_eq(t, P, r, K):
+# Given function crafted in python syntax
+dP =r*P* (1 - P/K)
+return dP
+# Test 1
+dP = my_logistic_eq(0, 10, 1.1, 15)
+print(dP)
+# Test 2: Plotting
+to = 0
+%3D
+tf = 20
+PO = 10
+r = 1.1
+K = 20
+t = np.linspace(0, 20, 2001)
+f = partial(my_logistic_eq, r=r, K=K)
+sol = solve_ivp(f, [t0, tf), [PO],
+t_eval=t)
+plt.figure(figsize=(10, 8))
+plt.plot(sol.t, sol.y[0])
+plt.plot(t,
+K* PO * np.exp(r * t) / (K + PO * (np.exp(r * t) - 1)),
+"r.")
+plt.xlabel("time")
+plt.ylabel("population")
+plt.legend(["Numerical Solution", "Exact Solution")
+plt.grid(True)
+plt.show()
+
+#question 2 
+######################################
+The following is the required Python script with the required function completed:
+# Importing numpy library for array manipulation functions
+import numpy as np
+# Function to form the system of differential equations of a Lorentz attracter
+def my_lorenz(t, S, sigma, rho, beta):
+if (sigma < 0) or (rho < 0) or (rho < 0):
+raise BaseException("Error: Sigma, rho and beta needs all to be non-negative!")
+dS = np.zeros(3)
+ds[0] = sigma * ( S[2] - S[1] )
+%3D
+dS[1] = S[0] * ( rho - S[2] ) - S[1]
+dS[2] = S[0] * S[1] - beta * S[2];
+return ds
+# Test
+S = np.array([1, 2, 3])
+dS = my_lorenz(0, s, 10, 28, 8/3)
+print(dS)
+
+#question 3
+########################################
+The following is the required Python script with the required function:
+# Importing numpy for array manipulation
+import numpy as np
+# Importing scipy integrate initial value problem
+from scipy.integrate import solve_ivp
+# Importing matplotlib pyplot to plot curves
+import matplotlib.pyplot as plt
+# Function to solve lorenz function for a time span
+def my_lorenz_solver(t_span, s0, sigma, rho, beta):
+s = np.array([1, 2, 3])
+#3
+Function to generate a system of ordinary differential equations
+# for lorentz attracter
+# t- scalar denoting time
+# S-3 x 1 array denoting the position (x, y, z)
+# sigma - Velocity / thermal diffusivity.
+# rho - Rayleigh number
+# beta - Geometric factor.
+# dS - 3x1 array - change in the input coordinates
+def my_lorenz(t, S, sigma, beta, rho):
+х, у, z %3DS
+dx =
+sigma * (y - x)
+dy = x* (rho - z) - y
+dz = x * y - beta * z
+dS = [dx, dy, dz]
+%3D
+return dS
+dS = my_lorenz(0, s, 10, 28, 8/3)
+from functools import partial
+to = t_span[0]
+tf = t_span[1]
+t = np.linspace(t0, tf, 20001)
+f = partial(my_lorenz, sigma=sigma, rho=rho, beta=Dbeta)
+sol = solve_ivp(f, t_span, s0, t_ eval=t)
+T, X, Y, Z = sol.t, sol.y[0, :], sol.y[1, :), sol.y[2, :]
+return [T, X, Y, z]
+# Test code
+sigma
+= 10
+rho = 28
+beta = 8/3
+t0 = 0
+tf = 50
+s0 = np.array([0, 1, 1.05])
+[T, X, Y, Z] = my_lorenz_solver([t0, tf], s0, sigma, rho, beta)
+fig = plt.figure(figsize=(10, 10))
+ax = plt.axes(projection="3d")
+ax.grid()
+ax.plot3D(X, Y, Z)
+# Set axes label
+ax.set_xlabel("x", labelpad=20)
+ax.set_ylabel("y", labelpad=20)
+ax.set_zlabel("z", labelpad320)
+plt.show()
+Comment
