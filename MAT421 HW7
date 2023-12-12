@@ -1,0 +1,40 @@
+#question 1 
+##################################
+#Lambda function for subtraction.
+subtraction = lambda x,y:x-y
+
+#question 2
+##################################
+#Function to concatonate two strings#
+##################################
+def add_string(s1,s2):
+return s1+s2 #concatenate input strings and return
+
+#question 3 
+##################################
+#Fubction to show TypeError#
+##################################
+def fun(a):
+return a #do nothing,just for proucing TypeError
+
+#question 4 
+##################################
+#Function greet which takes name and age as parameters and greets the user
+##################################
+def greeting(name,age)：#Using f-string to print the name and age as parameters
+print(f"Hi, my name is (name) and I am (age) years old.")
+#test cases
+greeting("John", 26)
+greeting("Kate", 19)
+
+#question 5 
+##################################
+#import numpy and math library
+import numpy as np
+import math
+#area between two circles is given as:
+#Area of bihher circle - area of smaller circle
+def my_donut_area(r1,r2):
+return math.pi*(r2**2 - r1**2)
+#test caes
+my_donut_area(np.arange(1, 4), np.arange(2,7,2))
