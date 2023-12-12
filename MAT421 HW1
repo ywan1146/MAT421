@@ -1,0 +1,213 @@
+# question 1
+###############################################
+#Function to convert a binary to decimal#
+###############################################
+def my_bin_2_dec(b):
+        d=0#Initialize
+        for digit in b :#Fetch each digit from imput
+                d=d*2 +int(digit)#convert digit to integer
+                return d;#Renturn with decial value
+#question 2
+###############################################
+#Function to convert a decinal number to binary#
+###############################################
+def my_dec_3_bin(d):
+        b=[]#Initialize
+        if d==0:#Special case
+                b.append(0)
+                while d>= 1:#Till decimal is >1
+                        b.append(d%2)#Divide by 2,add remainder to list
+                        d= d/2 #Divivde by 2,keep only quotient
+
+                        b.reverse()#Reverse the binary list
+                        return b;#Return with ninary value
+#question 3
+##############################################
+#Fuctions to convert decimal to binary and vice versa#
+##############################################
+#Convert decimal to binary
+def my_dec2_bin(d):
+        b=[]#Intialize
+        if d==0:#Specia; case
+                b.append(d%2)#Divide by 2,add remainder to list
+                d=d/2#Divide by 2,keep only quotient
+
+                b.reverse()#Reverse the binary list
+                return b;#Return with binary value
+
+
+#Convert binary to decimal
+        def my_bin_2_dec(b):
+                d=0#Initialize
+                for digit in b:#Fetch each digit from input
+                        d=d*2+int(digit)#convert digit ti integer
+                        return d;
+#question 4
+#################################################
+#Function to add two binary number#
+#################################################
+def my_bin_adder(b1,b2):
+#Get the length of the list with more binary dights
+        max_len=max(len(b1),len(b2))
+
+        #Append 0s at the beginning of the shorter list.
+        b1=[0]*(max_len-len(b1))+b1
+        b2=[0]*(max_len-len(b2))+b2
+
+        b=[]#Initialize
+        carry=0
+        for i in range(max_len-1,-1,-1):
+        #Add the two elements from list and carry
+                sum= carry +b1[i] +b2[i]
+                res=1 if sum%2 ==1 else 0#convert to 0,1
+
+                #Add result of sum of the current digits to list
+                b.append(res)
+                carry= 0 if sum <2 else 1#new carry
+
+                #carry in the last place, add it to list
+                if carry !=0:
+                        b.append(1)
+
+                #Reverse the output list of binary sum
+                        b.reverse()
+                        return b
+#question 5
+#Pythin uses 64 bits to reprensent a floating -point number.
+#1 bit for sign,11 bits for the exponenr and,53 bits for the fraction.
+#Thus means that the maximum exponent can make 1024 values for base 2.For base 10 itis 308.
+#Also note that the fraction is a number between 1 and 2.
+#As a result,the maxium number that can be represented is 1.7976931348623e+308.
+#The minimum number that can repsented is 2.22507385850702014e-308.
+#If more bits are allocated to the fraction part,the digits available for the expoment part will decrease.
+#As a result,the maximum amd minimum values that can be represented will also decrease expinentially.
+#On the other hand,if more bits allocated to the exponent, the maximum and minimum values that can be represented will also increase expomemtially.However, the precision would be lost.
+#Note that the sign can have only two values + or -.So, one bit enough to represent the two .
+#So,there is no point in increasing the bits for the sign unnecessary.
+
+#question 6
+#import math
+def my_ieee_2_dec(ieee):
+        #first bit is the sign
+        s=ieee[0]
+        e=0
+        j=len(range(0,10))
+        #the next 11-bits are the expomemts calculate exponent
+        for i in range(1,12):
+                e+=int(ieee[i])*2**j
+                j-=1
+        #print(e)
+                e=e-1023
+                print(e)
+        #calculate fraction part of 52 bits
+                f=0
+                j=1
+                for k in range(12,53):
+                        f+=int(ieee[k])*1/2**(j)
+                        j+=1
+                        print(f)
+        #calcute the decimal by the formula as below
+                        d=(-1)**int(s)*2**e*(1+f)#using **
+        #d=pow(-1,int(s))*pow(2,e)*(1+f)#using power function
+                        return d
+                ieee="1100000001001000000000000000000000000000000000000000000000000000"
+                print(len(ieee))
+                d=my_ieee_2_dec(ieee)
+                print(f"ieee={ieee} to dec={d}")
+                ieee="0100000000001011001100110011001100110011001100110011001100110011"
+                print(len(ieee))
+                d=my_ieee_2_dec(ieee)
+                print(f"ieee={ieee} to dec={d}")
+#quetion 7
+def dec_2_ieee(d):
+return "{0:b}".format(int(d))
+def dec_2frac_ieee(f):
+num=f
+print("decimal part recvd=",num)
+frac=[]
+while num!=0:
+binarybit=num*2
+#print(binarybit)
+if binarybit < 1:
+num=binarybit
+#print(num)
+binarybit=0
+frac.append(binarybit)
+else:
+num=binarybit-int(binarybit)
+binarybit=1
+frac.append(binarybit)
+#print(num)
+#print(frac)
+print(*frac)
+#print(len(frac))
+return ".join(map(str,frac))"
+def my_dec_2_ieee(d):
+if d > 0:
+s="0"
+else:
+s="1"
+d=abs(d)
+num1=dec2bin(int(d))
+print("integer part=",num1)
+fr=d-int(d)
+num2=dec_2frac_ieee(fr)
+print("decimal part=",num2)
+#represent in scientific form
+num_sci_format=str(num1)+'.'+num2
+print("integer.decimal format=",num_sci_format)
+m=0
+decimalpointpos=0
+for j in num_sci_format:
+if j=='.':
+print("binary decimal point position",m)
+decimalpointpos=m
+m+=1
+#shift the decimal to m-1 position
+#print(m)
+Inum_sci_format=list(num_sci_format)
+Inum_sci_format.pop(decimalpointpos)
+Inum_sci_format.insert(1,'.')
+#print(Inum_sci_format)
+num_sci_format1=".join(map(str,Inum_sci_format))"
+print(f"scientific format={num_sci_format1}*(2**decimalpointpos)")
+print("length of num_sci_format1=",len(num_sci_format1))
+Imantissa=list(num_sci_format1)[2:]
+#mantissa=".join(map(str,Imantissa))
+#print("mantissa=",mantissa)
+if len(Imantissa) < 52:
+for i in range(len(Imantissa),52):
+Imantissa.append(0)
+print("mantissa padded with length=",len(Imantissa))
+mantissa_padded=".join(map(str,Imantissa))"
+print("mantissa-padded=",mantissa_padded)
+#shift the deciman point to first place for exponent
+#exponent bias + power for IEEE=2**(k-1)+power
+# 2**(11-1)+6 ,in 85.125 case
+#1024-1+6=1029.Convert it to binary to get exponent
+#the section after decimal point is 52 bit mantissa
+exponent=2**(11-1)-1+(decimalpointpos-1)
+print("exponent=",exponent)
+expo=dec2bin(exponent)
+print(f"expo= {expo}")
+#0 -10000000110 - #0101010010000000000000000000000000000000000000000000
+ieee=s+str(exp0)+mantissa_padded
+return ieee
+d=1.518484199625# tested correct
+ieee=my_dec_2_ieee(d)
+print ("ieee=",ieee)
+print ( len (ieee.strip()))
+print
+('================================================================================')
+#d=0.875
+#d=85.125
+d=-309.141740#tested correct with dec_2_ieee(d)
+ieee=my_dec_2_ieee(d)
+print ("ieee=",ieee)
+print ( len (ieee.strip()))
+print
+('================================================================================')
+d=-25252# tested correct
+ieee=my_dec_2_ieee(d)
+print ("ieee=",ieee)
+print ( len (ieee.strip()))
