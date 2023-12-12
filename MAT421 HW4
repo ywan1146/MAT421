@@ -1,0 +1,320 @@
+#question1
+#################################################
+#Required function
+def my_fixed_points(f,g,tol,max_iter):
+F = lambda x : f(x) - g(x)
+# Function to guess the point
+def guess(f,initial):
+istart = initial - 1
+iend = initial + 1
+# Running the loop for a max of 1000000 times
+limit = 10000000
+i = 1
+while i < limit:
+# If the function value for istart is negative
+# and the function value for iend is positive
+# update a and b with istart and iend and return them
+if ( f( istart) < 0 ) & ( f( iend) > 0 ):
+a = istart;
+b = iend;
+return [a, b]
+# If function value for istart is positive, update istart
+elif f(istart) > 0:
+istart = istart - 2*istart
+# else update iend
+else:
+iend iend +2*iend
+i+=1
+[a,b) = guess(F,0)
+i = 1
+# Function to get the sign of the input
+def sign(a):
+return (a > 0) - (a < 0)
+while(i, max_iter):
+# Finding center of the interval and appending it to R
+m = (a+b)/2
+# If the f(m) is below tolerance, return m
+if (abs(F(m)) < tol):
+retum m
+# If the sign of f(m) and f(a) is same, update a, else update b with m
+elif (sign(F(m)) == sign(F(a))):
+a = m
+else:
+b=m
+return []
+Complete program is as follows:
+The following program demonstrates the functionality of the function
+my_fixed_points(f, g, tol, max_iter):
+def my_fixed_points(f,g,tol.max_iter):
+F = lambda x : f(x) - g(x)
+# Function to guess the point
+def guess(f,initial):
+istart = initial - 1
+iend = initial +1
+# Running the loop for a max of 1000000 times
+limit = 10000000
+i = 1
+while i< limit:
+# If the function value for istart is negative
+# and the function value for iend is positive
+# update a and b with istart and iend and return them
+if ( f( istart) < 0) & ( f( iend) > 0):
+a = istart;
+b = iend;
+return [a, b]
+# If function value for istart is positive, update istart
+# If function value for istart is positive, update istart
+elif f(istart) > 0:
+istart = istart - 2*istart
+# else update iend
+else:
+iend = iend + 2'iend
+i+=1
+[a,b] = guess(F,0)
+i= 1
+# Function to get the sign of the input
+def sign(a):
+return (a > 0) - (a< 0)
+while(i, max_itor):
+# Finding center of the interval ard appending it to R
+m (a+b)2
+# If the f(m) is below tolerance, return m
+if (abs(F(m)) < tol):
+retum m
+# If the sign of t(m) and f(a) is same, update a, eise updateb with m
+elif (sign(F(m)) == sign(F(a))):
+a = m
+else:
+b = m
+retum []
+# Test
+f = lambda x: x*3;
+g = lambda x: 8;
+error Tolerance = 1e-3;
+limit = 10000;
+ans = my_fixed points(f, g. error Tolerance, limit)
+print(ans)
+
+#question2
+#################################################
+# Required function implementing the Bisection method
+def myBisection(f, a, b, tol):
+# Calculating the number of the intervals
+n = np.ceil(np.log2((b-a)/tol))
+# Initializing zero array of size n
+R = np.zeros(int(n))
+E = np.zeros(int(n))
+def sign(a):
+if (a == 0):
+return a
+return alabs(a)
+# Setting the number of iterations (limit) of while loop to n
+limit = n
+i = 0
+while(i
+# Finding center of the interval and appending it to R
+R[i] = (a+b)/2
+# Appending the value F(R[i]) into E
+E[i] = abs(f(R[i])）
+# If the E[i] is below tolerance, update R and E
+if (E[i] < tol):
+R[np.isnan(R)] = []
+E[np.isnan(R)] = []
+# If the sign of f(R[i]) and f(a) is same, update a
+elif (sign(f(R[i])） == sign(f(a))):
+a = R[i]
+# otherwise b
+else:
+b R[i]
+i += 1
+return [R, E]
+Complete program is as follows:
+The following program demonstrates the functionality of the function
+myBisection():
+import numpy as np
+def myBisection(f, a, b, tol):
+n = np.ceil(np.log2((b-a)/tol))
+R= np.zeros(int(n))
+E = np.zeros(int(n))
+limit = n;
+i = 0
+def sign(a):
+if (a == 0):
+return a
+return alabs(a)
+while(i
+R[i] = (a+b)/2
+E[i] = abs(f(R[i]))
+if (E[i] < tol):
+R[np.isnan(R)] = []
+E[np.isnan(R)] = []
+elif (sign(f(R[i])）
+sign(f(a))):
+a = R[i]
+else:
+b = R[i]
+i += 1
+return [R, E]
+# Test 1
+f1 = lambda x: x**2 - 23;
+low = 0;
+high = 2;
+tolerance = 1e-1；
+[R, E] = myBisection(f1, low, high, tolerance)
+print([R, E])
+# Test 2
+f2 = lambda x: np.sin(x) - np.cos(x);
+tolerance = 1e-2;
+[R, E] = myBisection(f2, low, high, tolerance)
+print([R, E])
+
+#question3
+###########################################
+# Required function my_newton
+def my_newton(f, df, x0, tol):
+R= []
+E＝[]
+# Appending x0 to R
+R.append(x0)
+# Appending absolute value of last term of R to E
+E.append(abs(f(R[-1]))）
+# Setting the while loop limit to 1000 items
+limit = 1000
+i = 0
+while i< limit:
+R.append(x0 - ( f(x0) / df(x0) ))
+E.append( abs( f( R[-1] )))
+# If the last value of E is within tolerance
+ifE [-1] < tol:
+return [R,E]
+# If the last value of R is not within tolerance, update x0 with last value of R
+x0 = R[-1]
+i = i +1
+return [R,E]
+Complete program is as follows:
+The following program demonstrates the functionality of the function my_newton():
+import numpy as np
+# Required function my_newton
+def my_newton(f, df, x0, tol):
+R= []
+E=[]
+# Appending x0 to R
+Rappend(x0)
+#Appending absolute value of last term of R to E
+E.append(abs(f(R[-1]))）
+# Setting the while loop limit to 1000 items
+limit = 1000
+i = 0
+while i< limit:
+R.append(x0 - ( f(x0) / df(x0) ))
+E.append( abs( f( R[-1] )))
+# If the last value of E is within tolerance
+if E[-1] < tol:
+return [R,E]
+# If the last value of R is not within tolerance, update x0 with last value of R
+x0 = R[-1]
+i = i +1
+return [R,E]
+# Test 1
+f= lambda x: x**2 - 2
+df = lambda x: 2*x
+[R, E] = my_newton(f, df, 1, 1e-5)
+print([R, E])
+# Test 2
+f = lambda x: np.sin(x) - np.cos(x)
+df = lambda x: np.cos(x) + np.sin(x)
+[R, E] = my_newton(f, df, 1, 1e-5)
+# Test 2
+f = lambda x: np.sin(x) - np.cos(x)
+df = lambda x: np.cos(x) + np.sin(x)
+[R, E] = my_newton(f, df, 1, 1e-5)
+print([R, E])
+
+#question4
+####################################
+# Required function my_pipe_builder
+def my_pipe_builder(C_ocean, C_land, L, H):
+p1 lambda x: math.sqrt(H**2 + x**2)
+p2 = lambda x: L-x
+cost = lambda x: p1(x) * C_ocean + p2(x) * C_land
+error = lambda a,b: cost(a) - cost(b)
+tolerance = 1e-6;
+limit = int(np.ceil(np.log2(L/ tolerance) ))
+i= 1;
+a = 0;
+b = L;
+while i< limit:
+m=(a+b)/2
+if abs(error(a,b)) < tolerance:
+return m
+elif error(a,b) < 0:
+b = m
+else:
+a = m
+i += 1
+Complete program is as follows:
+The following program demonstates the functionality of the function
+my_pipe_builder(C_ocean, C_land, L, H):
+# Importing numpy for basic arithmetic manipulation
+import numpy as np
+# Importing math, for using square root
+import math
+# Required function
+def my_pipe_builder(C_ocean, C_land, L, H):
+p1 = lambda x: math.sqrt(H**2 + x**2)
+p2 = lambda x: L-x
+cost = lambda x: p1(x) *C ocean + p2(x) *C land
+error = lambda a,b: cost(a) - cost(b)
+tolerance = 1e-6;
+limit = int(np.ceil(np.log2(L/ tolerance) ))
+i= 1;
+a = 0;
+b = L;
+while i< limit:
+m=(a+b)/2
+if abs(error(a,b)) < tolerance:
+return m
+elif error(a,b) < 0:
+b = m
+else:
+a = m
+i += 1
+# Test cases
+one = my_pipe_builder(20, 10, 100, 50)
+print(one)
+two = my_pipe_builder(30, 10, 100, 50)
+print(two)
+three my_pipe_builder(30, 10, 100, 20)
+print(three)
+
+#question5
+##########################################
+Program:
+import numpy as np
+# Function implementing the Newton-Raphson method
+def my_newton(f, df, x0, tol):
+R= 0
+E =0
+R.append(x0)
+E.append(abs(f(R[-1])))
+limit = 1000
+i= 0
+while i< limit:
+R.append(x0 - ( f(x0) / df(x0) ))
+E.append( abs( f( R[-1] )))
+if E[-1] < tol:
+return [R,E]
+x0 = R[-1]
+i=i+1
+return [R,E]
+# Oscillatory function: square root of x
+f = lambda x: x**0.5;
+# Derivative of f
+df = lambda x: 1/(2*(x**0.5));
+# Initial guess
+x0 = 1;
+# Tolerance
+tol = 1e-2;
+[R,E] = my_newton(f, df, x0, tol)
+# Printing the real part of the result of my_newton which is osciallatory in nature
+print(np.real(R))
